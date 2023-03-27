@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631362773942",
+    "project_id": "socialdevpost",
+    "storage_bucket": "socialdevpost.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631362773942:android:85fa94e19af3f7443e9717",
+        "android_client_info": {
+          "package_name": "com.socialpost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631362773942-q8r5vq5ahpquf42fss0jgjpart0p3h1p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3f9QWZKoOpREk0RxMn12uUcKLNoG97Mc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631362773942-q8r5vq5ahpquf42fss0jgjpart0p3h1p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
