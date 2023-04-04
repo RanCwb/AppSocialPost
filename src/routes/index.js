@@ -7,15 +7,17 @@ import { AuthContext } from "../context/auth";
 
 function Routes() {
 
-    const {singed} = useContext(AuthContext)
+    const {singed,loading} = useContext(AuthContext)
 
 
-    const loading = false
+
 
     if (loading) {
-        <View style={{flex:1, justifyContent:'center', alignItems:"center", backgroundColor: '#36393f'}}>
-                <ActivityIndicator size={60} color="red"/>
+        return(
+        <View style={{flex:1, justifyContent:'center', alignItems:"center", backgroundColor: '#1E90FF'}}>
+                <ActivityIndicator size={100} color="#FFA500"/>
         </View>
+        )
     }
 
     return(

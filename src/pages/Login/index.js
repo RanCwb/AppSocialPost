@@ -1,14 +1,15 @@
-import React,{useState} from "react";
-import { View, Text } from "react-native";
+import React,{useContext, useState} from "react";
+import { View, Text,ActivityIndicator } from "react-native";
 import { Container,Title,Input,Button,ButtonText,Register,RegisterText } from "./styles";
-
-
+import { AuthContext } from "../../context/auth";
  function Login() {
 
     const [login,setLogin] = useState(true)
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const {register,loggin,loadingAuth} = useContext(AuthContext)
+
 
         function changeLogin() {
 
@@ -19,7 +20,7 @@ import { Container,Title,Input,Button,ButtonText,Register,RegisterText } from ".
         }
         
 
-        function singIn() {
+       async function singIn() {
             
             if( email === '' || password === ''){
 
@@ -29,18 +30,19 @@ import { Container,Title,Input,Button,ButtonText,Register,RegisterText } from ".
 
             }
             
+            await loggin(email,password)
 
         }
 
-        function singUp() {
+       async function singUp() {
 
-          if (name ==='' || email === '' || password === '') {
+          if (name === '' || email === '' || password === '') {
             
             console.log('PREENCHA OS DADOS DE CADASTRO!')
         
             return;
           }
-
+          await register(email, password, name)
             
         }
 
@@ -66,9 +68,17 @@ import { Container,Title,Input,Button,ButtonText,Register,RegisterText } from ".
         
         
                     <Button onPress={() => singIn() }>
-        
+                        {loadingAuth ? (
+
+                            <ActivityIndicator size={30} color={"#ffff00"}/>
+
+
+                        ) : (
+
                         <ButtonText>Acessar</ButtonText>
-        
+                        
+                        ) }
+                   
                     </Button>
         
                     <Register onPress={() => changeLogin()}>
@@ -92,21 +102,22 @@ import { Container,Title,Input,Button,ButtonText,Register,RegisterText } from ".
             <Input
             placeholder="Seu nome"    
             value={name}
-            onChangeText={(t) => setName(t)}
+            onChangeText={(text) => setName(text)}
            
             />
 
             <Input
             placeholder="Seu Email"    
             value={email}
-            onChangeText={(t) => setEmail(t)}
+            onChangeText={(text) => setEmail(text)}
             />
 
             
             <Input
             placeholder="Sua Senha"    
             value={password}
-            onChangeText={(t) => setEmail(t)}
+            onChangeText={(text) => setPassword(text)}
+            
             
             />      
 
