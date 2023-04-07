@@ -51,7 +51,7 @@ import { AuthContext } from "../../context/auth";
             return(
 
                 <Container>
-                    <Title>Social<Text style={{fontSize:60, color:'#FFA500'}}>Post</Text> </Title>
+                    <Title>Social<Text style={{fontSize:60, color:'#e52246'}}>Post</Text> </Title>
         
         
                     <Input
@@ -70,7 +70,7 @@ import { AuthContext } from "../../context/auth";
                     <Button onPress={() => singIn() }>
                         {loadingAuth ? (
 
-                            <ActivityIndicator size={30} color={"#ffff00"}/>
+                            <ActivityIndicator size={30} color={"#e52246"}/>
 
 
                         ) : (
@@ -96,7 +96,7 @@ import { AuthContext } from "../../context/auth";
     return(
 
         <Container>
-            <Title>Social<Text style={{fontSize:60, color:'#FFA500'}}>Post</Text> </Title>
+            <Title>Social<Text style={{fontSize:60, color:'#e52246'}}>Post</Text> </Title>
 
 
             <Input

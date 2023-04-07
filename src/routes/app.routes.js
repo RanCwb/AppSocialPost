@@ -31,11 +31,11 @@ function StackRoutes() {
                 component={NewPost}
                 options={{
                     title: 'Novo Post',
-                    headerTintColor: '#FFA500',
+                    headerTintColor: 'white',
 
 
                     headerStyle:{
-                        backgroundColor:'#1E90FF'
+                        backgroundColor:'#e52246'
                     }
 
                 }}
@@ -44,10 +44,10 @@ function StackRoutes() {
                 name="Posts User"
                 component={PostsUser}
                 options={{
-                    headerTintColor: '#FFA500',
+                    headerTintColor: 'white',
 
                     headerStyle:{
-                        backgroundColor:'#1E90FF'
+                        backgroundColor:'#e52246'
                     }
 
 
@@ -69,11 +69,11 @@ function AppRoutes() {
             headerShown:false,
             tabBarHideOnKeyboard: true,
             tabBarShowLabel: false,
-            tabBarActiveTintColor: '#FFA500',
+            tabBarActiveTintColor: 'white',
 
 
             tabBarStyle:{
-                backgroundColor: '#1E90FF',
+                backgroundColor: '#e52246',
                 borderTopWidth: 0
 
             } 
