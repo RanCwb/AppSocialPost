@@ -15,6 +15,7 @@ import PostList from "../../components/PostsList";
     const  {user} = useContext(AuthContext)
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
+
     const [refresh, setRefresh] = useState(false)
     const [lastItem, setLastItem] = useState('')
     const [emptyList, setemptyList] = useState(false)
@@ -26,7 +27,7 @@ import PostList from "../../components/PostsList";
 
             function find() {
                 
-                firestore().collection('posts')
+               firestore().collection('posts')
                 .orderBy('created','desc')
                 .limit(5)
                 .get()
@@ -49,17 +50,16 @@ import PostList from "../../components/PostsList";
                     })
                     
                     setPosts(postList)
-                    setLastItem(snapshot.docs[snapshot.docs.lenght -1 ])
+                    setLastItem(snapshot.docs[snapshot.docs.length -1 ])
                     setemptyList(!!snapshot.emptyList)
                     setLoading(false)
 
 
                    }
-
+                  
                 })
 
             }
-
 
             find();
 
@@ -79,7 +79,7 @@ import PostList from "../../components/PostsList";
 
             setLoading(false)
 
-            return 
+            return null;
         }
 
         if (loading) return;
@@ -129,19 +129,19 @@ import PostList from "../../components/PostsList";
                     setPosts([]);
                     const postList = []
 
-                    snapshot.docs.map( p =>{
+                    snapshot.docs.map( t =>{
 
                         postList.push({
 
-                            ...p.data(),
-                            id:p.id
+                            ...t.data(),
+                            id:t.id
                         })
                         
 
                     })
                     
                     setPosts(postList)
-                    setLastItem(snapshot.docs[snapshot.docs.lenght -1 ])
+                    setLastItem(snapshot.docs[snapshot.docs.length -1 ])
                     setemptyList(false)
                     setLoading(false)
 

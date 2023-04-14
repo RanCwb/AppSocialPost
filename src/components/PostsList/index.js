@@ -3,12 +3,18 @@ import {Container,Name,Header,Avatar,ContentView,Content,LikeButton,Like,Actions
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import {formatDistance} from 'date-fns'
 import {ptBR} from 'date-fns/locale'
+import firestore from '@react-native-firebase/firestore'
+import { Alert } from "react-native/types"
+import {useNavigation} from '@react-navigation/native'
+
+
 function PostList({data,userId}) {
-    
+    const navigation = useNavigation();
     const [likePost,setLikePost] = useState(data?.likes)
 
+   
+
     function timePost() {
-        // console.log(new Date(data.created.seconds * 1000))
 
         const datepost = new Date(data.created.seconds * 1000)
 
@@ -21,11 +27,71 @@ function PostList({data,userId}) {
         )
 
     }
+
+   async  function HandleLikePost(id, likes) {
+       
+       const doID = `${userId}_${id}`
+
+        const doc = await firestore().collection('likes')
+        .doc(doID).get();
+
+        if (doc.exists) {
+            
+            await firestore().collection('posts')
+            .doc(id).update({
+
+                likes : likes - 1
+
+            })
+
+            await firestore().collection('likes').doc(doID)
+            .delete()
+            .then(()=> {
+
+                setLikePost(likes - 1)
+
+            })
+
+            return;
+        }
+
+         await firestore().collection('likes')
+        .doc(doID).set({
+
+            postId : id,
+            userId: userId
+
+        })
+
+        await firestore().collection('posts')
+        .doc(id).update({
+
+            likes : likes + 1
+
+
+        })
+        .then(() =>{
+
+            setLikePost(likes + 1)
+
+
+        })
+
+        
+
+        
+
+
+
+
+    }
+
+
     
     return(
 
         <Container>
-            <Header>
+            <Header onPress={() =>navigation.navigate("Posts User",{title :data.autor, userID: data.user})}>
 
                 {data.avatarUrl? (
 
@@ -58,7 +124,7 @@ function PostList({data,userId}) {
             </ContentView>
 
             <Actions>
-                <LikeButton>
+                <LikeButton onPress={() => HandleLikePost(data.id, likePost)}>
                     <Like>
 
                         {likePost === 0 ? " " : likePost}
