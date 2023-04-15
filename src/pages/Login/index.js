@@ -2,6 +2,7 @@ import React,{useContext, useState} from "react";
 import { View, Text,ActivityIndicator } from "react-native";
 import { Container,Title,Input,Button,ButtonText,Register,RegisterText } from "./styles";
 import { AuthContext } from "../../context/auth";
+import * as Animatable from  "react-native-animatable"
  function Login() {
 
     const [login,setLogin] = useState(true)
@@ -9,6 +10,8 @@ import { AuthContext } from "../../context/auth";
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const {register,loggin,loadingAuth} = useContext(AuthContext)
+    
+    const TitleAnimation = Animatable.createAnimatableComponent(Title)
 
 
         function changeLogin() {
@@ -51,19 +54,20 @@ import { AuthContext } from "../../context/auth";
             return(
 
                 <Container>
-                    <Title>Social<Text style={{fontSize:60, color:'#e52246'}}>Post</Text> </Title>
+                    <TitleAnimation animation="zoomIn">Social<TitleAnimation style={{fontSize:60, color:'#e52246'}}>Post</TitleAnimation> </TitleAnimation>
         
         
                     <Input
-                    placeholder="seuemail"    
+                    placeholder="Email"    
                     value={email}
                     onChangeText={(e) => setEmail(e)}
                     />
         
                     <Input
-                    placeholder="suasenha"      
+                    placeholder="Senha"      
                     value={password}
                     onChangeText={(e) => setPassword(e)}
+                    secureTextEntry={true}
                     />
         
         
@@ -96,7 +100,7 @@ import { AuthContext } from "../../context/auth";
     return(
 
         <Container>
-            <Title>Social<Text style={{fontSize:60, color:'#e52246'}}>Post</Text> </Title>
+            <TitleAnimation>Social<TitleAnimation style={{fontSize:60, color:'#e52246'}}>Post</TitleAnimation> </TitleAnimation>
 
 
             <Input

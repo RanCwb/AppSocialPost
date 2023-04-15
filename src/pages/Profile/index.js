@@ -3,13 +3,14 @@ import { View, Text,Modal} from "react-native";
 import Header from "../../components/Header";
 import {Container, Button,Email, ButtonText,Name,UploadButton,UploadText,Avatar,ModalContainer,Input,ButtonBack} from "./styles"
 import { AuthContext } from "../../context/auth";
-import Feather from "react-native-vector-icons/Feather"
+import Feather from "react-native-vector-icons/Feather" 
+import firestore from "@react-native-firebase/firestore"
 
 
  function Profile() {
 
 
-        const {singOut,user} = useContext(AuthContext)
+        const {singOut,user,storageUser,setUser,StoryUser } = useContext(AuthContext)
         const {out} = useContext(AuthContext)
         const [nome, setNome] = useState(user?.nome)
         const [url, setUrl] = useState(null)
@@ -24,9 +25,49 @@ import Feather from "react-native-vector-icons/Feather"
 
     async function updatefile() {
 
-        alert('teste')
+        if (nome === '' ) {
+            
+            return;
+        }
+       
+        await firestore().collection('users')
+        .doc(user?.uid)
+        .update({
 
+            nome:nome
+
+        })
+
+        const postDocs = await firestore().collection('posts')
+        .where ("userId", '==', user?.uid).get();
+
+        postDocs.forEach( async doc => {
+
+            await firestore().collection('posts').doc(doc.id)
+            .update({
+
+                autor:nome 
+
+            })
+        })
+
+     
+        let data = {
+
+            uid: user.uid,
+            nome: nome,
+            email: user.email
+
+
+        }
+       
+        setOpen(false)
+        setUser(data)
+        StoryUser(data)
         
+      
+       
+
     }
 
     return(
