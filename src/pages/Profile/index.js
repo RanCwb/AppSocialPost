@@ -39,7 +39,7 @@ import firestore from "@react-native-firebase/firestore"
         })
 
         const postDocs = await firestore().collection('posts')
-        .where ("userId", '==', user?.uid).get();
+        .where ("user", '==', user?.uid).get();
 
         postDocs.forEach( async doc => {
 
@@ -64,7 +64,7 @@ import firestore from "@react-native-firebase/firestore"
         setOpen(false)
         setUser(data)
         StoryUser(data)
-        
+
       
        
 
